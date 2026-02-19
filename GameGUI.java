@@ -14,7 +14,7 @@ public class GameGUI {
         
         // create panel with 3x3 gridLayout
         JPanel gamePanel = new JPanel();
-        gamePanel.setLayout(new GridLayout(3, 3));
+        gamePanel.setLayout(new GridLayout(3, 3)); // GridLayout will automatically position the buttons in the grid
 
         // create 9 buttons
         JButton[] buttons = new JButton[9];
