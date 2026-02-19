@@ -60,8 +60,6 @@ public class GameGUI {
         
         window.add(menuPanel);
         window.setVisible(true);
-
-        window.setVisible(true);
     }
 
     /**
