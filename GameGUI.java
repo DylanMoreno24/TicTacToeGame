@@ -1,5 +1,5 @@
-import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class GameGUI {
     // temporarily in a main method for testnig
@@ -10,9 +10,16 @@ public class GameGUI {
         window.setSize(400, 400);
         window.setLocationRelativeTo(null); // centers the windown when code is executed
         
-
-        JButton button = new JButton(); // buttons where the X and O will be 
-        window.add(button);
-        window.setVisible(true);
+        
     }
+
+    /**
+     * method that will create the 3x3 buttons for the game
+     */
+    public JPanel buttonGrid() {
+        JPanel panel = new JPanel();
+        
+
+        return panel;
+    } 
 }
