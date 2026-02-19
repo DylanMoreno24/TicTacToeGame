@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JOptionPane;
 
 public class GameGUI {
     private static JFrame window;
@@ -85,8 +86,8 @@ public class GameGUI {
             buttons[i].setFont(buttons[i].getFont().deriveFont(24f)); // increase font size
             
             // create final variables for use in listener
-            int row = i / 3;
-            int col = i % 3;
+            int row = i / 3; // buttons 0-2 = row 0, buttons 3-5 = row 1, buttons 6-8 = row 2
+            int col = i % 3; // buttons 0,3,6 = col 0, buttons 1,4,7 = col 1, buttons 2,5,8 = col 2
             int buttonIndex = i;
             
             // add click listener to each button
@@ -108,7 +109,15 @@ public class GameGUI {
                         if (model.winner() != 0) {
                             int winner = model.winner();
                             String winnerText = (winner == GameModel.X) ? p1Name : p2Name;
-                            System.out.println(winnerText + " wins!");
+                            
+                            // disable all buttons
+                            for (JButton btn : buttons) {
+                                btn.setEnabled(false);
+                            }
+                            
+                            // show winner popup
+                            JOptionPane.showMessageDialog(window, winnerText + " wins!", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+                            mainMenu(); // return to main menu after game over
                         }
                     } catch (IllegalArgumentException ex) {
                         System.out.println("Invalid move: " + ex.getMessage());
