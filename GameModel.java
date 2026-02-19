@@ -47,6 +47,10 @@ public class GameModel {
 	     else
 	         return(0);
 	 }
+	 
+	 public int[][] getBoard() {
+	     return board;
+	 }
 	
 	 public String toString( ) {
 	   StringBuilder sb = new StringBuilder( );

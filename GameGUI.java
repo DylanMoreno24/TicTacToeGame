@@ -75,10 +75,47 @@ public class GameGUI {
         JPanel gamePanel = new JPanel();
         gamePanel.setLayout(new GridLayout(3, 3)); // GridLayout will automatically position the buttons in the grid
 
+        // create game model instance
+        GameModel model = new GameModel();
+        
         // create 9 buttons
         JButton[] buttons = new JButton[9];
         for (int i = 0; i < 9; i++) {
             buttons[i] = new JButton();
+            buttons[i].setFont(buttons[i].getFont().deriveFont(24f)); // increase font size
+            
+            // create final variables for use in listener
+            int row = i / 3;
+            int col = i % 3;
+            int buttonIndex = i;
+            
+            // add click listener to each button
+            buttons[i].addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    try {
+                        model.putMark(row, col);
+                        
+                        // update button text based on game state
+                        if (model.getBoard()[row][col] == GameModel.X) {
+                            buttons[buttonIndex].setText("X");
+                        } else if (model.getBoard()[row][col] == GameModel.O) {
+                            buttons[buttonIndex].setText("O");
+                        }
+                        
+                        buttons[buttonIndex].setEnabled(false); // disable button after click
+                        
+                        // check for winner
+                        if (model.winner() != 0) {
+                            int winner = model.winner();
+                            String winnerText = (winner == GameModel.X) ? p1Name : p2Name;
+                            System.out.println(winnerText + " wins!");
+                        }
+                    } catch (IllegalArgumentException ex) {
+                        System.out.println("Invalid move: " + ex.getMessage());
+                    }
+                }
+            });
+            
             gamePanel.add(buttons[i]);
         }
 
