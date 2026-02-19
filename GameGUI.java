@@ -1,13 +1,74 @@
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class GameGUI {
-    // temporarily in a main method for testnig
-    // TODO: change into run() method and implement into Main.java file
-    public static void main(String[] args) {
-        JFrame window = new JFrame("Tic Tac Toe Game"); // creates the window where all components of the game will be shown
+    private static JFrame window;
+    private static String p1Name;
+    private static String p2Name;
+
+    public void mainMenu() {
+        window = new JFrame("Tic Tac Toe - Main Menu");
+        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        window.setSize(500, 500);
+        window.setLocationRelativeTo(null);
+
+        // create panel where all buttons will be stored
+        JPanel menuPanel = new JPanel();
+        menuPanel.setLayout(new BoxLayout(menuPanel, BoxLayout.Y_AXIS));
+
+        // Player 1 label and text field
+        JLabel label1 = new JLabel("Player 1 Name: ");
+        JTextField textField1 = new JTextField(5);
+
+        // Player 2 label and text field
+        JLabel label2 = new JLabel("Player 2 Name: ");
+        JTextField textField2 = new JTextField(5);
+
+        // start button
+        JButton startButton = new JButton("Start Game");
+
+        // Add button listener
+        startButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                p1Name = textField1.getText();
+                p2Name = textField2.getText();
+                
+                // Validate that names are not empty
+                if (p1Name.isEmpty() || p2Name.isEmpty()) {
+                    System.out.println("Please enter both player names");
+                    return;
+                }
+                
+                window.dispose();
+                gameBoard();
+            }
+        });
+        
+        // Add components to panel
+        menuPanel.add(label1);
+        menuPanel.add(textField1);
+        menuPanel.add(label2);
+        menuPanel.add(textField2);
+        menuPanel.add(startButton);
+        
+        window.add(menuPanel);
+        window.setVisible(true);
+
+        window.setVisible(true);
+    }
+
+    /**
+     * method that starts the the window where the game will be displayed
+     */
+    public void gameBoard() {
+        window = new JFrame("Tic Tac Toe - Game");
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); // terminates the program when the window is closed
         window.setSize(400, 400);
         window.setLocationRelativeTo(null); // centers the windown when code is executed
